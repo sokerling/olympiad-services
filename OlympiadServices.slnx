@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Access/">
+    <Project Path="src/Access/Access.Api/Access.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Submissions/">
+    <Project Path="src/Submissions/Submissions.Api/Submissions.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/TasksPrinting/">
+    <Project Path="src/TasksPrinting/TasksPrinting.Api/TasksPrinting.Api.csproj" />
+  </Folder>
+</Solution>
