@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Validate Compose
+        run: docker compose config --quiet
+      - name: Build and start applications
+        run: docker compose up --build -d
+      - name: Check application connections
+        run: node scripts/check.mjs
+      - name: Print container logs
+        if: failure()
+        run: docker compose logs --no-color
+      - name: Stop applications
+        if: always()
+        run: docker compose down

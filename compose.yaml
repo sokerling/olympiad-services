@@ -1,0 +1,34 @@
+name: olympiad-services
+
+services:
+  access:
+    build:
+      context: .
+      dockerfile: src/Access/Access.Api/Dockerfile
+    ports:
+      - "127.0.0.1:5101:8080"
+
+  tasks-printing:
+    build:
+      context: .
+      dockerfile: src/TasksPrinting/TasksPrinting.Api/Dockerfile
+    ports:
+      - "127.0.0.1:5102:8080"
+
+  submissions:
+    build:
+      context: .
+      dockerfile: src/Submissions/Submissions.Api/Dockerfile
+    ports:
+      - "127.0.0.1:5103:8080"
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - access
+      - tasks-printing
+      - submissions
